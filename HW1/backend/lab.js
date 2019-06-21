@@ -26,7 +26,7 @@ function startServer(port) {
         } else {
             switch(ext) {
                 case '.css': mimeType = 'text/css'; break;
-                case '.js': mimeType = 'application/javascript'; break;
+                case '.js':  mimeType = 'application/javascript'; break;
                 case '.png': mimeType = 'image/png'; break;
             }
             response.writeHead(200, {'Content-Type': mimeType});

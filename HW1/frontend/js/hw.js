@@ -2,7 +2,7 @@
 
 function hw1() {
     function print(p = 0) {
-        console.log('Функция выполняется с задержкой: %d сек.', p);
+        console.log('Функция выполнилась с задержкой: %d сек.', p);
     }
 
     function pause(fn, seconds) {
@@ -11,7 +11,9 @@ function hw1() {
         }
     }
 
-    let paused = pause(print, 2);
+    let timeout = 5
+      , paused  = pause(print, timeout);
+    console.log('Запуск функции "print" через %d сек.', timeout);
     paused();
 }
 
