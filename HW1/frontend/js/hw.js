@@ -1,8 +1,8 @@
 'use strict';
 
 function hw1() {
-    const print = (p = 0) => console.log('Функция выполнилась с задержкой: %d сек.', p);
-    const pause = (fn, seconds) => (() => setTimeout(() => fn(seconds), seconds * 1000));
+    const print = (p = 0) => console.log('Функция выполнилась с задержкой: %d сек.', p)
+        , pause = (fn, seconds) => (() => setTimeout(() => fn(seconds), seconds * 1000));
 
     let timeout = 5
       , paused  = pause(print, timeout);
