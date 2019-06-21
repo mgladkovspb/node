@@ -27,6 +27,7 @@ function startServer(port) {
             switch(ext) {
                 case '.css': mimeType = 'text/css'; break;
                 case '.js': mimeType = 'application/javascript'; break;
+                case '.png': mimeType = 'image/png'; break;
             }
             response.writeHead(200, {'Content-Type': mimeType});
         }
@@ -42,7 +43,7 @@ function startServer(port) {
 function render(file) {
     if(!fs.existsSync(base + file))
         return null;
-    return fs.readFileSync(base + file, { encoding: 'utf8' });
+    return fs.readFileSync(base + file);
 }
 
 function render404() {
