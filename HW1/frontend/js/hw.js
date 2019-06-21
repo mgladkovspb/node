@@ -1,5 +1,7 @@
 'use strict';
 
+// раз уж пошла такая пьянка, то короткий вариант...
+// хотя я предпочитаю так не делать :)
 function hw1() {
     const print = (p = 0) => console.log('Функция выполнилась с задержкой: %d сек.', p)
         , pause = (fn, seconds) => (() => setTimeout(() => fn(seconds), seconds * 1000));
@@ -18,6 +20,8 @@ function hw2() {
     function decoratorFn(fn, ...args) {
         let a = fn();
         // млин, клёвая идея!!! как я забыл про reduce...
+        // Виталий Владимирович, спасибо...
+        // Евгений Александрович, кто короче? ;)
         return () => Array.isArray(a) ? args.reduce((o, v, i) => (o[v] = a[i], o), {}) : a;
         // return function() {
         //     let a      = fn()
