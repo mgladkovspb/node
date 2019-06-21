@@ -28,10 +28,7 @@ function hw2() {
                 return a;
 
             for(let i = 0; i < args.length; i++) 
-                if(a.length - 1 < i)
-                    result[args[i]] = '---';
-                else
-                    result[args[i]] = a[i];
+                result[args[i]] = a[i];
 
             return result;
         }
