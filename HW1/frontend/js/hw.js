@@ -19,28 +19,34 @@ function hw1() {
 
 function hw2() {
     const enumFn = () => [1, 2, 3, 4, 5, 6, 7, 8]
-        , langFn = () => ['JS', 'Python', 'C++'];
+        , langFn = () => ['JS', 'Python', 'C++']
+        , oFn    = () => { return { ...['a', 'b', 'c'] } };
 
     function decoratorFn(fn, ...args) {
-        return function() {
-            let a      = fn()
-              , result = {};
+        let a = fn();
+        // млин, клёвая идея!!! как я забыл про reduce...
+        return () => Array.isArray(a) ? args.reduce((o, v, i) => (o[v] = a[i], o), {}) : a;
+        // return function() {
+        //     let a      = fn()
+        //       , result = {};
 
-            if(!Array.isArray(a))
-                return a;
+        //     if(!Array.isArray(a))
+        //         return a;
 
-            for(let i = 0; i < args.length; i++) 
-                result[args[i]] = a[i];
+        //     for(let i = 0; i < args.length; i++) 
+        //         result[args[i]] = a[i];
 
-            return result;
-        }
+        //     return result;
+        // }
     }
 
     let e = decoratorFn(enumFn, 'one', 'two', 'free', 'four', 'five')
-      , l = decoratorFn(langFn, 'js', 'p', 'c');
+      , l = decoratorFn(langFn, 'js', 'p', 'c')
+      , o = decoratorFn(oFn);
 
     console.log('%o', e());
     console.log('%o', l());
+    console.log('%o', o());
 }
 
 document.addEventListener('DOMContentLoaded', function() {
