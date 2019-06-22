@@ -73,7 +73,7 @@ async function compose() {
       , pageEnd   = '</div></body></html>';
 
     result += pageStart;
-      for(let i = 0; i < files.length; i++) {
+    for(let i = 0; i < files.length; i++) {
         let data = await render('/' + files[i]);
         if(data !== null)
             result += data;
