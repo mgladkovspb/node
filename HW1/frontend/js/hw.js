@@ -3,8 +3,8 @@
 // раз уж пошла такая пьянка, то короткий вариант...
 // хотя я предпочитаю так не делать :)
 function hw1() {
-    const print = (p = 0) => console.log('Функция выполнилась с задержкой: %d сек.', p)
-        , pause = (fn, seconds) => (() => setTimeout(() => fn(seconds), seconds * 1000));
+    const print = (seconds = 0) => console.log('Функция выполнилась с задержкой: %d сек.', seconds)
+        , pause = (fn, seconds) => (() => setTimeout(() => fn.apply(this, arguments), seconds * 1000));
 
     let timeout = 5
       , paused  = pause(print, timeout);
