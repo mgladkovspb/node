@@ -5,7 +5,7 @@ const rnd = (min, max) => {
 }
 
 function task1() {
-    function* generateSymbol() {
+    function* generateSymbol(type) {
         let o = {
             'numbers': '0123456789',
             'lowercase': 'abcdefghijklmnopqrstuvwxyz',
@@ -14,23 +14,21 @@ function task1() {
         }
     
         while(true) {
-            let type = yield ''
-              , str  = o[type];
-            yield str[rnd(0, str.length - 1)];
+            let str = o[type];
+            type = yield str[rnd(0, str.length - 1)];
         }
     }
 
     function* generatePassword(len = 5) {
         let types  = ['numbers', 'lowercase', 'uppercase', 'ascii']
-          , gs     = generateSymbol();
-    
+          , gs     = generateSymbol(types[rnd(0, 3)]);
+
         let counter = len;
         while(true) {
             let result  = '';
 
             for(let i = 0; i < counter; i++) {
                 let type = types[rnd(0, 3)];
-                gs.next();
                 result += gs.next(type).value;
             }
 
