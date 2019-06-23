@@ -52,7 +52,7 @@ function task2() {
     
     fs.readFile('data.txt', 'utf8', (error, data) => {
         if(error)
-            return console.log(error);
+            throw error;
 
         let numbers = data.split(' ')
           , out1    = ''
