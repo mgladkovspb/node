@@ -4,12 +4,16 @@
 // хотя я предпочитаю так не делать :)
 function hw1() {
     const print = (seconds = 0) => console.log('Функция выполнилась с задержкой: %d сек.', seconds)
-        , pause = (fn, seconds) => (() => setTimeout(() => fn.apply(this, arguments), seconds * 1000));
+        , pause = function(fn, seconds) {
+            return function() {
+                setTimeout(() => fn.apply(this, arguments), seconds * 1000)
+            }
+        };
 
     let timeout = 5
       , paused  = pause(print, timeout);
     console.log('Запуск функции "print" через %d сек.', timeout);
-    paused();
+    paused(5);
 }
 
 function hw2() {
