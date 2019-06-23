@@ -1,5 +1,7 @@
 'use strict';
 
+const fs = require('fs');
+
 const rnd = (min, max) => {
     return Math.floor(min + Math.random() * (max + 1 - min));
 }
@@ -40,6 +42,33 @@ function task1() {
     console.log(gp.next().value);
     console.log(gp.next(7).value);
     console.log(gp.next(20).value);
+}
+
+function task2() {
+    function cb(error) {
+        if (error) throw error;
+        console.log('Файл записан.');
+    }
+    
+    fs.readFile('data.txt', 'utf8', (error, data) => {
+        if(error)
+            return console.log(error);
+
+        let numbers = data.split(' ')
+          , out1    = ''
+          , out2    = '';
+        for(let i = 0; i < numbers.length; i++) {
+            let num = parseInt(numbers[i]);
+            if(num % 2 === 0)
+                out1 += num.toString() + ' ';
+            out2 += (num ** 3).toString() + ' ';
+        }
+
+        fs.writeFile('out-1.txt', out1, 'utf8', cb);
+        fs.writeFile('out-2.txt', out2, 'utf8', cb);
+
+        console.log('Созданы или перезаписаны 2 файла. out-1.txt и out-2.txt');
+    });
 }
 
 function task3() {
@@ -83,4 +112,5 @@ function task3() {
 }
 
 console.log('Задача №1. Результат работы:'), task1();
+console.log('Задача №2. Результат работы:'), task2();
 console.log('Задача №3. Результат работы:'), task3();
