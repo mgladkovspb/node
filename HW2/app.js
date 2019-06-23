@@ -64,8 +64,8 @@ function task2() {
             out2 += (num ** 3).toString() + ' ';
         }
 
-        fs.writeFile('out-1.txt', out1, 'utf8', cb);
-        fs.writeFile('out-2.txt', out2, 'utf8', cb);
+        fs.writeFile('out-1.txt', out1.trimRight(), 'utf8', cb);
+        fs.writeFile('out-2.txt', out2.trimRight(), 'utf8', cb);
 
         console.log('Созданы или перезаписаны 2 файла. out-1.txt и out-2.txt');
     });
