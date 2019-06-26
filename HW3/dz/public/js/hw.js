@@ -46,6 +46,16 @@ function getUserList() {
     });
 }
 
+function getHtmlContent() {
+    HttpRequest('/ajax', '', 'GET', '', function() {
+        if (this.readyState === 4 && this.status === 200) {
+            let ajaxContainer = document.getElementById('ajax');
+            ajaxContainer.innerHTML = this.response;
+        }
+    });
+}
+
+
 document.addEventListener('DOMContentLoaded', function() {
     //document.getElementById('convertForm').addEventListener('submit', onCovertFormSend);
 });

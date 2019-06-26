@@ -18,6 +18,14 @@ module.exports = function(app) {
         });
     });
 
+    app.get('/ajax', (req, res) => {
+        let page = '/ajax.html';
+        app.render(page).then((data) => {
+            res.setHeader('Content-type', app.checkContentType(page));
+            res.end(data, 'utf8');
+        });
+    });
+
     app.get('/camel_to_snake', (req, res) => {
         let params = liburl.parse(req.url, true);
         res.end(camelToSnake(params.query.name || ''))
