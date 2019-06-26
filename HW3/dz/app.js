@@ -1,15 +1,16 @@
 'use strict';
 
-function snakeToCamel(str) {
-    return ('_' + str)
-        .replace(/(?<=_)[a-z]{1}/g, (match) => match.toUpperCase())
-        .replace(/_/g, '');
-}
+let express = require('./nedo-express')
+  , path    = require('path')
+  , app     = express();
 
-function camelToSnake(str) {
-    return str.replace(/(?!^)(?=[A-Z])/g, '_')
-        .toLowerCase();
-}
+app.static('/js',     path.join(__dirname, './public/js'));
+app.static('/css',    path.join(__dirname, './public/css'));
+app.static('/images', path.join(__dirname, './public/img'));
 
-console.log(snakeToCamel('camel_to_snake'));
-console.log(camelToSnake('CamelCase'));
+require('./routes')(app);
+
+let port = 31337;
+app.listen(port, () => {
+    console.log('Сервер слушает порт: %d', port);
+});
