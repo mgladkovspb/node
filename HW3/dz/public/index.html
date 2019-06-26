@@ -6,7 +6,18 @@
     </head>
     <body>
         <div class="main-content">
-            <form id="convertForm" action="#" class="form form-default shadow">
+            <div class="block form form-default shadow">
+                <h3>Задача №2</h3>
+                <div id="userList">
+
+                </div>
+                <div class="form-group">
+                    <br />
+                    <input type="button" class="btn btn-danger" value="Получить список пользователей" onclick="getUserList();"/>
+                </div>
+            </div>
+            <form id="convertForm" action="#" class="form form-default shadow" onsubmit="onCovertFormSend(); return false;">
+                <h3>Задача №4</h3>
                 <div class="form-group">
                     <label for="identificator">Идентификатор</label>
                     <input id="identificator" name="identificator" type="text" class="form-control backlight" placeholder="CamelCase or snake_case" />

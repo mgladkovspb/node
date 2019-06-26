@@ -63,7 +63,8 @@ class NedoExpress {
             '.html': 'text/html',
             '.css' : 'text/css',
             '.js'  : 'application/javascript',
-            '.png' : 'image/png'
+            '.png' : 'image/png',
+            '.json': 'application/json'
         };
         console.log('ext: %s, mime: %s', ext, mimeType[ext]);
         return mimeType[ext] || 'text/plain';

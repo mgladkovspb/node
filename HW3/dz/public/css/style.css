@@ -15,6 +15,10 @@ button, input:focus {
     outline-style: none; /* отключить браузерную посдветку */
 }
 
+.block {
+    margin-bottom: 20px;
+}
+
 .form {
     display: block;
     background-color: #ffffff;
@@ -86,4 +90,8 @@ button, input:focus {
 
 .shadow {
     box-shadow: 0px 0px 10px 0px rgba(170,170,170,1);
+}
+
+h3 {
+    margin-top: 0;
 }

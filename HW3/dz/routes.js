@@ -10,6 +10,14 @@ module.exports = function(app) {
         });
     });
 
+    app.get('/users', (req, res) => {
+        let users = '/js/users.json';
+        app.render(users).then((data) => {
+            res.setHeader('Content-type', app.checkContentType(users));
+            res.end(data, 'utf8');
+        });
+    });
+
     app.get('/camel_to_snake', (req, res) => {
         let params = liburl.parse(req.url, true);
         res.end(camelToSnake(params.query.name || ''))
