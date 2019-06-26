@@ -55,7 +55,26 @@ function getHtmlContent() {
     });
 }
 
+function getProducts() {
+    HttpRequest('/products', '', 'GET', '', function() {
+        if (this.readyState === 4 && this.status === 200) {
+            let productsContainer = document.getElementById('productList')
+              , data              = JSON.parse(this.response)
+              , ul                = productsContainer.children[0];
+
+            data.forEach((v) => {
+                let li = document.createElement('li');
+                li.innerText = v.id + ', ' + v.name + ', ' + v.cnt;
+                ul.appendChild(li);
+            });
+        }
+    });
+}
 
 document.addEventListener('DOMContentLoaded', function() {
-    //document.getElementById('convertForm').addEventListener('submit', onCovertFormSend);
+    document.getElementById('productList').addEventListener('scroll', function(e) { 
+        if(e.target.scrollTop + e.target.offsetHeight === e.target.scrollHeight)
+            getProducts();
+    });
+    getProducts();
 });
