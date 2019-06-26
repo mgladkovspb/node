@@ -64,7 +64,7 @@ function getProducts() {
 
             data.forEach((v) => {
                 let li = document.createElement('li');
-                li.innerText = v.id + ', ' + v.name + ', ' + v.cnt;
+                li.innerHTML = v.id + ' | <span style="width: 180px; display: inline-block;">' + v.name + '</span> | ' + v.cnt;
                 ul.appendChild(li);
             });
         }

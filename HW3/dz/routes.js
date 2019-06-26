@@ -87,9 +87,9 @@ function productsGenerator(count) {
 
     for(let i = 0; i < count; i++) {
         result.push({
-            id: rnd(0, 999).toString().padStart(3),
+            id: rnd(0, 999).toString().padStart(3, '0'),
             name: gs.next(rnd(5, 20)).value,
-            cnt: rnd(0, 99).toString().padStart(2)
+            cnt: rnd(0, 99).toString().padStart(2, '0')
         });
     }
 
