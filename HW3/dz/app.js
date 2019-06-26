@@ -4,9 +4,9 @@ let express = require('./nedo-express')
   , path    = require('path')
   , app     = express();
 
-app.static('/js',     path.join(__dirname, './public/js'));
-app.static('/css',    path.join(__dirname, './public/css'));
-app.static('/images', path.join(__dirname, './public/img'));
+app.static('/js');
+app.static('/css');
+app.static('/img');
 
 require('./routes')(app);
 
