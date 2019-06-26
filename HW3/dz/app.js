@@ -4,6 +4,7 @@ let express = require('./nedo-express')
   , path    = require('path')
   , app     = express();
 
+// пока не доделал...
 app.static('/js');
 app.static('/css');
 app.static('/img');
