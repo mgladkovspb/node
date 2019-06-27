@@ -18,7 +18,18 @@ const server = http.createServer((request, response) => {
             }
             break;
         case 'POST': 
-            
+            /*
+            TODO: сформировать имя выходного файла
+            */
+            let newFileStream = fs.createWriteStream('')
+              , headerParser  = new HeaderParser();
+
+            newFileStream.on('close', function(){
+                response.writeHead(200);
+                response.end();
+            });
+
+            request.pipe(headerParser).pipe(newFileStream);
             break;
         default: 
             response.statusCode = 400;
@@ -39,5 +50,14 @@ class HeaderParser extends stream.Transform {
 
     _transform(chunk, encoding, callback) {
         this.data += chunk.toString();
+    }
+
+    _flush(callback) {
+        let json = '';
+        /*
+        TODO: сделать формирование json объекта
+        */
+        this.push(json);
+        callback();
     }
 }
