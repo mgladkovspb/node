@@ -1,7 +1,8 @@
 'use strict';
 
-const http = require('http')
-    , fs   = require('fs');
+const http   = require('http')
+    , stream = require('stream')
+    , fs     = require('fs');
 
 let port = 31337;
 const server = http.createServer((request, response) => {
@@ -16,7 +17,9 @@ const server = http.createServer((request, response) => {
                 response.end('Ой!');
             }
             break;
-        case 'POST': break;
+        case 'POST': 
+            
+            break;
         default: 
             response.statusCode = 400;
             response.end();
@@ -26,3 +29,15 @@ const server = http.createServer((request, response) => {
 server.listen(port, () => {
     console.log('Сервер слушает порт: %d', port);
 });
+
+
+class HeaderParser extends stream.Transform {
+    constructor() {
+        super();
+        this._data = '';
+    }
+
+    _transform(chunk, encoding, callback) {
+        this.data += chunk.toString();
+    }
+}
