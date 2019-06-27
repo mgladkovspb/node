@@ -6,11 +6,20 @@ const http = require('http')
 let port = 31337;
 const server = http.createServer((request, response) => {
     switch(request.method) {
-        case 'GET': break;
+        case 'GET': 
+            if(request.url === '/' || request.url === '/index.html') {
+                response.setHeader('Content-type', 'text/html');
+                let newFileStream = fs.createReadStream('./index.html');
+                newFileStream.pipe(response);
+            } else {
+                response.statusCode = 404;
+                response.end('Ой!');
+            }
+            break;
         case 'POST': break;
         default: 
-            request.setHeader(400);
-            request.end();
+            response.statusCode = 400;
+            response.end();
     }
 });
 
