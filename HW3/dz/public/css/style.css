@@ -83,6 +83,10 @@ button, input:focus {
     transform: translate(-50%);
 }
 
+div.main-content div:last-child form:last-child {
+    margin-bottom: 30px;
+}
+
 .c404 {
     font-size: 10em;
 }
