@@ -53,20 +53,51 @@ class HeaderParser extends Transform {
         next();
     }
 
-    _flush(next) {
-        let header = this._data.split('\n')[0]
-          , json = {};
+    _parseProtocolHeader(str) {
+        let result = {};
 
-        if(header.includes('HTTP')) {
-            let temp = header.split(' ');
-            if(temp[0].includes('HTTP')) {
-                json.protocol       = temp[0].trim();
-                json.status_code    = parseInt(temp[1]);
-                json.status_message = (temp[2] || '').trim();
+        let temp = str.split(' ');
+        if(temp[0].includes('HTTP')) {
+            result.protocol       = temp[0].trim();
+            result.status_code    = parseInt(temp[1]);
+            result.status_message = (temp[2] || '').trim();
+        } else {
+            result.method   = temp[0].trim();
+            result.uri      = temp[1].trim();
+            result.protocol = temp[2].trim();
+        }
+
+        return result;
+    }
+
+    _flush(next) {
+        let headers = this._data.split('\n')
+          , body = false
+          , json = {
+              http: {},
+              headers: [],
+              body: ''
+          };
+
+        for(let i = 0; i < headers.length; i++) {
+            if(i === 0) {
+                json.http = this._parseProtocolHeader(headers[i]);
+                continue;
+            }
+
+            if(headers[i] === '\r') {
+                body = true;
+                continue;
+            }
+
+            if(!body) {
+                let header = {}
+                  , tmp    = headers[i].split(':');
+                console.log(tmp);
+                header[tmp[0].trim()] = tmp[1].trim();
+                json.headers.push(header);
             } else {
-                json.method   = temp[0].trim();
-                json.uri      = temp[1].trim();
-                json.protocol = temp[2].trim();
+                json.body = headers[i];
             }
         }
 
