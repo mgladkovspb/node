@@ -8,8 +8,25 @@
         <form name="sendFile">
             <input name="file" type="file">
         </form>
-        <script type="javascript">
-            
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+            crossorigin="anonymous"></script>
+        <script type="text/javascript">
+            document.addEventListener('DOMContentLoaded', () => {
+                let fldFile = document.forms.sendFile.file;
+                fldFile.addEventListener('change', (e) => {
+                    let file = e.target.files[0];
+                    $.ajax({
+                        type: 'POST',
+                        url: file.name,
+                        data: file,
+                        processData: false,
+                        success: function(response) {
+                            alert('Создан файл: ' + response);
+                        }
+                    });
+                }, false);
+            });
         </script>
     </body>
 </html>

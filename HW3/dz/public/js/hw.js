@@ -73,7 +73,7 @@ function getProducts() {
 
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('productList').addEventListener('scroll', function(e) { 
-        if(e.target.scrollTop + e.target.offsetHeight === e.target.scrollHeight)
+        if(e.target.scrollTop + e.target.offsetHeight >= e.target.scrollHeight)
             getProducts();
     });
     getProducts();
