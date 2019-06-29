@@ -54,17 +54,23 @@ class HeaderParser extends Transform {
     }
 
     _parseProtocolHeader(str) {
-        let result = {};
+        let result      = {}
+          , temp        = str.split(' ')
+          , requestLine = /^([A-Z_]+) (.+) [A-Z]+\/(\d)\.(\d)$/
+          , statusLine  = /[0-9]{3}/g;
 
-        let temp = str.split(' ');
-        if(temp[0].includes('HTTP')) {
-            result.protocol       = temp[0].trim();
-            result.status_code    = parseInt(temp[1]);
-            result.status_message = (temp[2] || '').trim();
-        } else {
+        if(str.match(requestLine) !== null) {
             result.method   = temp[0].trim();
             result.uri      = temp[1].trim();
             result.protocol = temp[2].trim();
+        }
+
+        if(str.match(statusLine) !== null) {
+            if(temp.length === 2)
+                temp.unshift('HTTP/2');
+            result.protocol       = temp[0].trim();
+            result.status_code    = parseInt(temp[1]);
+            result.status_message = (temp[2] || '').trim();
         }
 
         return result;
@@ -72,36 +78,35 @@ class HeaderParser extends Transform {
 
     _flush(next) {
         let headers = this._data.split('\n')
-          , body = false
           , json = {
               http: {},
-              headers: [],
-              body: ''
+              headers: {}
           };
 
-        for(let i = 0; i < headers.length; i++) {
-            if(i === 0) {
-                json.http = this._parseProtocolHeader(headers[i]);
-                continue;
-            }
+        headers.forEach((line) => {
+            let index = line.indexOf(':');
 
-            if(headers[i] === '\r') {
-                body = true;
-                continue;
-            }
+            if(index === -1 && json.http.isEmpty()) {
+                json.http = this._parseProtocolHeader(line.trim());
+            } else if(index !== -1) {
+                let key   = line.slice(0, index).trim()
+                  , value = line.slice(index + 1).trim();
 
-            if(!body) {
-                let header = {}
-                  , tmp    = headers[i].split(':');
-                console.log(tmp);
-                header[tmp[0].trim()] = tmp[1].trim();
-                json.headers.push(header);
-            } else {
-                json.body = headers[i];
+                if (typeof(json.headers[key]) === 'undefined') {
+                    json.headers[key] = value;
+                }
             }
-        }
+        });
 
         this.push(JSON.stringify(json));
         next();
     }
+}
+
+Object.prototype.isEmpty = function() {
+    for(var key in this) {
+        if(this.hasOwnProperty(key))
+            return false;
+    }
+    return true;
 }
