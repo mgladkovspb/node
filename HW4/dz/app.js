@@ -55,22 +55,24 @@ class HeaderParser extends Transform {
 
     _parseProtocolHeader(str) {
         let result      = {}
-          , temp        = str.split(' ')
+          , temp        //= str.split(' ')
           , requestLine = /^([A-Z_]+) (.+) [A-Z]+\/(\d)\.(\d)$/
           , statusLine  = /[0-9]{3}/g;
 
         if(str.match(requestLine) !== null) {
+            temp = str.split(' ');
             result.method   = temp[0].trim();
             result.uri      = temp[1].trim();
             result.protocol = temp[2].trim();
         }
 
-        if(str.match(statusLine) !== null) {
-            if(temp.length === 2)
+        if((temp = str.match(statusLine)) !== null) {
+            result.status_code = parseInt(temp[0]);
+            temp = str.split(result.status_code.toString());
+            if(temp.length === 1)
                 temp.unshift('HTTP/2');
             result.protocol       = temp[0].trim();
-            result.status_code    = parseInt(temp[1]);
-            result.status_message = (temp[2] || '').trim();
+            result.status_message = (temp[1] || '').trim();
         }
 
         return result;
