@@ -1,0 +1,20 @@
+HTTP/1.1 301 Moved Permanently
+Date: Thu, 05 Oct 2017 21:35:56 GMT
+Server: mw1250.eqiad.wmnet
+Location: http://www.wikipedia.org/
+Cache-Control: max-age=2592000
+Expires: Sat, 04 Nov 2017 21:35:56 GMT
+Content-Type: text/html; charset=iso-8859-1
+Vary: X-Forwarded-Proto, Accept-Encoding
+X-Varnish: 978024405 829431680, 385697410 309609449, 61200214 945917860
+Via: 1.1 varnish-v4, 1.1 varnish-v4, 1.1 varnish-v4
+Age: 96365
+X-Cache: cp1054 hit/3, cp3032 hit/4, cp3043 hit/456
+X-Cache-Status: hit
+Set-Cookie: WMF-Last-Access=07-Oct-2017;Path=/;HttpOnly;secure;Expires=Wed, 08 Nov 2017 00:00:00 GMT
+Set-Cookie: WMF-Last-Access-Global=07-Oct-2017;Path=/;Domain=.wikipedia.com;HttpOnly;secure;Expires=Wed, 08 Nov 2017 00:00:00 GMT
+X-Analytics: nocookies=1
+X-Client-IP: 213.21.30.89
+Set-Cookie: GeoIP=RU:SPE:St_Petersburg:59.93:30.20:v4; Path=/; secure; Domain=.wikipedia.com
+Connection: keep-alive
+

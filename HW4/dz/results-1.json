@@ -1,0 +1,11 @@
+{
+    "status_code": "200",
+    "X-Powered-By": "PHP/5.5.5",
+    "Keep-Alive": "timeout=20",
+    "status_message": "OK",
+    "Server": "nginx/1.2.4",
+    "Date": "Fri, 06 Oct 2017 23:23:55 GMT",
+    "Connection": "keep-alive",
+    "Content-Type": "text/html",
+    "protocol": "HTTP/1.1"
+}

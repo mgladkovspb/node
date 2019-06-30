@@ -1,0 +1,14 @@
+GET /python-developer HTTP/1.1
+Host: profi.ifmo.ru
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Cookie: _ym_uid=14869406041053174215; _ga=GA1.2.1855508804.1487458090; _ym_isad=2
+X-Compress: 1
+Proxy-Authorization: d16687af489940764ff15d5fcc5b91f51768a569685da6556cd6f3f02f025bd1854d9205db6f6496
+Connection: keep-alive
+Upgrade-Insecure-Requests: 1
+Pragma: no-cache
+Cache-Control: no-cache
+

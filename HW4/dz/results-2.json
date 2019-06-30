@@ -1,0 +1,21 @@
+{
+    "Connection": "keep-alive",
+    "Cache-Control": "max-age=2592000",
+    "X-Client-IP": "213.21.30.89",
+    "status_message": "Moved Permanently",
+    "Expires": "Sat, 04 Nov 2017 21:35:56 GMT",
+    "Date": "Thu, 05 Oct 2017 21:35:56 GMT",
+    "Vary": "X-Forwarded-Proto, Accept-Encoding",
+    "Set-Cookie": "GeoIP=RU:SPE:St_Petersburg:59.93:30.20:v4; Path=/; secure; Domain=.wikipedia.com",
+    "X-Varnish": "978024405 829431680, 385697410 309609449, 61200214 945917860",
+    "Location": "http://www.wikipedia.org/",
+    "protocol": "HTTP/1.1",
+    "status_code": "301",
+    "X-Cache": "cp1054 hit/3, cp3032 hit/4, cp3043 hit/456",
+    "X-Analytics": "nocookies=1",
+    "Age": "96365",
+    "Server": "mw1250.eqiad.wmnet",
+    "X-Cache-Status": "hit",
+    "Content-Type": "text/html; charset=iso-8859-1",
+    "Via": "1.1 varnish-v4, 1.1 varnish-v4, 1.1 varnish-v4"
+}
