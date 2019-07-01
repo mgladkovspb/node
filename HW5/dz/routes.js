@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function(app) {
+module.exports = function (app) {
     app.get('/', (req, res) => {
         app.render('/index.html').then((data) => {
             res.setHeader('Content-type', app.checkContentType('/index.html'));
@@ -16,12 +16,12 @@ module.exports = function(app) {
 
         req.on('end', () => {
             let result = '';
-            if(data.includes('method=send_lead')) {
+            if (data.includes('method=send_lead')) {
                 res.writeHead(200, { 'Content-Type': 'application/json' });
                 result = send_lead(data);
-            } else if(data.includes('method=get_api_key')) {
+            } else if (data.includes('method=get_api_key')) {
                 result = get_api_key();
-            } 
+            }
 
             res.end(result);
         });
@@ -30,11 +30,11 @@ module.exports = function(app) {
 
 function send_lead(param) {
     let result = {}
-      , args = param.split('&');
+        , args = param.split('&');
 
     args.reduce((o, v, i) => {
         let [key, val] = v.split('=');
-        if(key !== 'method') {
+        if (key !== 'method') {
             o[key] = decodeURI(val);
         }
         return o;
