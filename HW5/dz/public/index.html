@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <h3>Отправка заявок пользователя</h3>
+    <form action='/task' method='post'>
+        <input type="hidden" name="method" value="send_lead" />
+        <label>Имя: </label><input type='text' name='name' required></input>
+        <label>Телефон: </label><input type='text' name='phone' required></input>
+        <label>IP: </label><input type='text' name='ip' required></input>
+        <label>Key: </label><input type='text' name='key' required></input>
+        <input type='submit' />
+    </form>
+    <h3>Получение ключа для работы с API</h3>
+    <form action='/task' method='post'>
+        <input type="hidden" name="method" value="get_api_key" />
+        <input type='submit' />
+    </form>
+</body>
+</html>
