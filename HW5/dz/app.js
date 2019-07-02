@@ -12,15 +12,15 @@
 // });
 
 const operators = {
-    '+': (x, y) => x + y,
-    '-': (x, y) => x - y,
-    '*': (x, y) => x * y,
-    '/': (x, y) => x / y,
-    '//': (x, y) => x / y >> 0,
-    '%': (x, y) => x % y,
-    '^': (x, y) => x ^ y,
-    '(': null,
-    ')': null
+    '+': { fn: (x, y) => x + y, p: 1},
+    '-': { fn: (x, y) => x - y, p: 1},
+    '*': { fn: (x, y) => x * y, p: 5},
+    '/': { fn: (x, y) => x / y, p: 5},
+    '//':{ fn: (x, y) => x / y >> 0, p: 5},
+    '%': { fn: (x, y) => x % y, p: 5},
+    '^': { fn: (x, y) => x ^ y, p: 5},
+    '(': { fn: null, p: 10},
+    ')': { fn: null, p: 10}
 };
 
 function calc(expr) {
@@ -29,7 +29,7 @@ function calc(expr) {
     expr.split(' ').forEach((token) => {
         if (token in operators) {
             let [y, x] = [stack.pop(), stack.pop()];
-            stack.push(operators[token](x, y));
+            stack.push(operators[token].fn(x, y));
         } else {
             stack.push(parseFloat(token));
         }
@@ -40,24 +40,42 @@ function calc(expr) {
 
 /* 
 TODO:
-1. учесть скобки
-2. Учесть приоритет операций
+доделать алгоритм, не коррекно формирует вызодную строку
 */
 function convert(expr) {
-    let result  = ''
-      , opstack = [];
+    let result = ''
+      , stack  = [];
 
     expr.split(' ').forEach((token) => {
         if (token in operators) {
-            opstack.push(token);
+            switch(token) {
+                case '(':
+                    stack.push(token); 
+                    break;
+                case ')':
+                    while(stack.length > 0) {
+                        let last = stack.pop();
+                        if(last !== '(')
+                            result += last + ' ';
+                    }
+                    break;
+                default:
+                    let last = stack.pop();
+                    if(last !== undefined && operators[last].p <= operators[token].p) {
+                        result += last + ' ';
+                        stack.push(token);
+                    } else {
+                        stack.push(token);
+                    }
+            }
         } else {
             result += token + ' ';
         }
     });
 
-    return result + opstack.pop();
+    return result + stack.pop();
 }
 
-let expr = convert('2 + 3')
+let expr = convert('( 6 + 10 - 4 ) / ( 1 + 1 * 2 ) + 1');
 console.log(expr);
 console.log(calc(expr));
