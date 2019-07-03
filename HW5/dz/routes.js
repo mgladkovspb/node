@@ -1,5 +1,7 @@
 'use strict';
 
+const calculator = require('./calc');
+
 module.exports = function (app) {
     app.get('/', (req, res) => {
         app.render('/index.html').then((data) => {
@@ -24,6 +26,28 @@ module.exports = function (app) {
             }
 
             res.end(result);
+        });
+    });
+
+    app.post('/calc/convert', (req, res) => {
+        let data = '';
+        req.on('data', (chunk) => {
+            data += chunk;
+        });
+
+        req.on('end', () => {
+            res.end(calculator.convert(data));
+        });
+    });
+
+    app.post('/calc/calculate', (req, res) => {
+        let data = '';
+        req.on('data', (chunk) => {
+            data += chunk;
+        });
+
+        req.on('end', () => {
+            res.end(calculator.calc(data));
         });
     });
 }

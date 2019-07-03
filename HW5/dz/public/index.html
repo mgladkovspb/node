@@ -2,6 +2,9 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+            crossorigin="anonymous"></script>
 </head>
 <body>
     <h3>Отправка заявок пользователя</h3>
@@ -18,5 +21,51 @@
         <input type="hidden" name="method" value="get_api_key" />
         <input type='submit' />
     </form>
+
+    <form name="calculator" method='post'>
+        <input type="text" style="width: 300px;" name="infix" placeholder="Введите формулу, можно без пробелов">
+        <input type="button" name="convert" value="Конвертировать в RPN">
+        <br />
+        <input type="text" style="width: 300px;" name="rpn" placeholder="Введите формулу в нотации RPN">
+        <input type="button" name="calculate" value="Вычислить выражение">
+        <br />
+        <input type="text" name="calc_result" disabled>
+    </form>
+
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', () => {
+            let infix        = document.forms.calculator.infix
+              , rpn          = document.forms.calculator.rpn
+              , calcResult   = document.forms.calculator.calc_result
+              , btnConvert   = document.forms.calculator.convert
+              , btnCalculate = document.forms.calculator.calculate;
+
+            btnConvert.addEventListener('click', (e) => {
+                e.preventDefault();
+                $.ajax({
+                    type: 'POST',
+                    url: '/calc/convert',
+                    data: infix.value,
+                    processData: false,
+                    success: function(response) {
+                        rpn.value = response;
+                    }
+                });
+            });
+            
+            btnCalculate.addEventListener('click', (e) => {
+                e.preventDefault();
+                $.ajax({
+                    type: 'POST',
+                    url: '/calc/calculate',
+                    data: rpn.value,
+                    processData: false,
+                    success: function(response) {
+                        calcResult.value = response;
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
