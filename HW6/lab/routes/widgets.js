@@ -45,7 +45,7 @@ route.get('/edit/:id', (req, res, next) => {
 route.post('/edit', (req, res, next) => {
     db.edit(req.body, (err) => {
         if (err)
-            return res.send('Error add widget!');
+            return res.send('Error edit widget!');
         res.redirect('/widgets/');
     });
 });
